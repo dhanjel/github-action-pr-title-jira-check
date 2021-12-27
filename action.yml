@@ -1,0 +1,28 @@
+name: 'Pull Request JIRA Validation'
+description: 'Validates that the pull request names correlates with a JIRA issue'
+author: 'Daniel Jansson'
+inputs:
+  jira-host:
+    description: 'JIRA Host'
+    required: true
+  jira-username:
+    description: 'JIRA Username'
+    required: true
+  jira-password:
+    description: 'JIRA Password'
+    required: true
+  jira-project-key:
+    description: 'JIRA Project Key'
+    required: true
+  github_token:
+    description: >
+      Personal access token (PAT) used to fetch the repository. The PAT is configured
+      with the local git config, which enables your scripts to run authenticated git
+      commands. The post-job step removes the PAT.
+      We recommend using a service account with the least permissions necessary.
+      Also when generating a new PAT, select the least scopes necessary.
+    required: false
+    default: ${{ github.token }}
+runs:
+  using: 'node12'
+  main: 'index.js'
