@@ -20,7 +20,10 @@ async function run() {
         }
 
         // Get pull request title
+        const owner = github.context.payload.pull_request.base.user.login;
+        const repo = github.context.payload.pull_request.base.repo.name;
         const client = new github.GitHub(githubToken);
+        
         const {data: pullRequest} = await client.pulls.get({
             owner,
             repo,
