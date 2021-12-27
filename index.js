@@ -53,7 +53,7 @@ async function run() {
         });
 
         var jiraIssueDetails = await jira.findIssue(issueKey);
-
+        core.info(jiraIssueDetails);
         if (jiraIssueDetails === undefined || jiraIssueDetails.fields === undefined) {
             core.setFailed('Could not find corresponding issue in JIRA.');
             return;
