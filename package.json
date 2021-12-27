@@ -19,8 +19,8 @@
   },
   "homepage": "https://github.com/dhanjel/github-action-pr-title-jira-check#readme",
   "dependencies": {
-    "@actions/core": "^1.6.0",
-    "@actions/github": "^5.0.0",
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^2.0.0",
     "jira-client": "^8.0.0"
   }
 }
