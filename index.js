@@ -33,7 +33,7 @@ async function run() {
         core.info("Pull Request title: " + pullRequestTitle);
 
         // Verify that title contains a valid Jira key
-        var issueNumber = new RegExp(jiraProjectKey + "\-(\d+)", "g").exec(pullRequestTitle) || [""];
+        var issueNumber = new RegExp(jiraProjectKey + "\-(\d+)\s.*", "g").exec(pullRequestTitle) || [""];
         if (issueNumber[0].length === 0) {
             core.setFailed('Could not find a valid Jira Issue number on the pull request title.');
             return;
