@@ -80782,12 +80782,12 @@ async function run() {
 
         // Verify that title contains a valid Jira key
         var issueNumber = new RegExp(jiraProjectKey + '-(\\d+)\\s.*', "g").exec(pullRequestTitle) || [""];
-        if (issueNumber[0].length === 0) {
+        if (issueNumber[0].length === 0 && issueNumber.length <= 1) {
             core.setFailed('Could not find a valid Jira Issue number on the pull request title.');
             return;
         }
 
-        var issueKey = jiraProjectKey + '-' + issueNumber[0];
+        var issueKey = jiraProjectKey + '-' + issueNumber[1];
         core.info('Jira Issue key: ' + issueKey);
 
         // Search for the issue in Jira
@@ -80801,6 +80801,11 @@ async function run() {
         });
 
         var jiraIssueDetails = await jira.findIssue(issueKey);
+
+        if (jiraIssueDetails === undefined || jiraIssueDetails.fields === undefined) {
+            core.setFailed('Could not find corresponding issue in JIRA.');
+            return;
+        }
 
         var jiraTitle = jiraIssueDetails.fields.summary;
         var jiraCompleteTitle = issueKey + " " + jiraTitle;
